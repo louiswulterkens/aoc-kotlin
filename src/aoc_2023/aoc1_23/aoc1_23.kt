@@ -1,9 +1,9 @@
-package aoc_2023.aoc1
+package aoc_2023.aoc1_23
 
 import getFileAsString
 import java.io.File
 
-fun aoc1P1(input: String) {
+fun aoc1P1_23(input: String) {
     println("Input Name: $input")
     val file = File(input)
 
@@ -12,7 +12,7 @@ fun aoc1P1(input: String) {
         var second: Char? = null
         var total = 0
 
-        val content = getFileAsString(input).iterator()
+        val content = file.readText().trim().iterator()
 
         while (content.hasNext()) {
             val char = content.next()
@@ -20,11 +20,11 @@ fun aoc1P1(input: String) {
             when {
                 char.isDigit() -> {
                     if (first == null) {
-                        println("First Char: ${char}")
+                        println("First Char: $char")
                         first = char
                         second = char
                     } else {
-                        println("Second Char: ${char}")
+                        println("Second Char: $char")
                         second = char
                     }
                 }
@@ -53,7 +53,7 @@ fun aoc1P1(input: String) {
     }
 }
 
-fun aoc1P2(input: String) {
+fun aoc1P2_23(input: String) {
     println("Input Name: $input")
     val file = File(input)
 

@@ -1,11 +1,11 @@
-package aoc_2023.aoc2
+package aoc_2023.aoc2_23
 
 import java.io.File
 import kotlin.math.max
 
 val colorList: List<Pair<String, Int>> = listOf(Pair("red", 12), Pair("green", 13), Pair("blue", 14))
 
-fun aoc2P1(input: String) {
+fun aoc2P1_23(input: String) {
     println("Input Name: $input")
     val file = File(input)
 
@@ -40,7 +40,7 @@ fun aoc2P1(input: String) {
     }
 }
 
-fun aoc2P2(input: String) {
+fun aoc2P2_23(input: String) {
     println("Input Name: $input")
     val file = File(input)
 
