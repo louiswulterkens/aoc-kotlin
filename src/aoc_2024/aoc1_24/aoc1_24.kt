@@ -2,7 +2,7 @@ package aoc_2024.aoc1_24
 
 import kotlin.math.abs
 
-fun aocP1_24(input: List<String>) {
+fun aoc1P1_24(input: List<String>) {
     val list1: MutableList<Int> = mutableListOf()
     val list2: MutableList<Int> = mutableListOf()
 
@@ -24,7 +24,7 @@ fun aocP1_24(input: List<String>) {
     println("Total: $total")
 }
 
-fun aocP2_24(input: List<String>) {
+fun aoc1P2_24(input: List<String>) {
     val list1: MutableList<Int> = mutableListOf()
     val list2: MutableList<Int> = mutableListOf()
 
