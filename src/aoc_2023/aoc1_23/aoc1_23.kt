@@ -1,6 +1,5 @@
 package aoc_2023.aoc1_23
 
-import getFileAsString
 import java.io.File
 
 fun aoc1P1_23(input: String) {

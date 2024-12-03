@@ -1,7 +1,5 @@
 package aoc_2024.aoc2_24
 
-import kotlin.math.abs
-
 val oneOrMoreDigits = Regex("""(\d+)""")
 
 fun aoc2P1_24(input: List<String>) {
