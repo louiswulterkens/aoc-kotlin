@@ -24,17 +24,22 @@ fun findValidIndexes(rulesList: List<String>, pagesList: List<List<Int>>): List<
 
 fun checkValidInstruction(instruction: List<Int>, rules: Map<Int, Set<Int>>): Boolean {
     val validDigits = instruction.mapIndexed { xIndex, digit ->
+        // get the rules for the current digits
         val digitRules = rules[digit] ?: setOf()
 
+        // Get only the numbers that pertain to that digits rules
         val ys = instruction.filter { digitRules.contains(it) }
-        val validYIndexes = ys.map { y ->
-            instruction.mapIndexedNotNull { index, i -> // find all indexes of Y
-                if (i == y) index else null
-            }.any { yIndex ->
-                yIndex > xIndex
-            }
-        }
 
+        // For each Y
+        val validYIndexes = ys.map { y ->
+            instruction
+                // get all indexes of that Y
+                .mapIndexedNotNull { index, i -> if (i == y) index else null }
+                // Check that at least 1 of the Y-instances appears after the X
+                // Wording said "X must be printed at some point before Y", so if rule 3|4 was used on 3,4,3, that should be valid because there's a 3 before the 4
+                .any { yIndex -> yIndex > xIndex }
+        }
+        // Check that none of the digits failed
         !validYIndexes.contains( false )
     }
     return !validDigits.contains(false)
@@ -78,27 +83,38 @@ fun aoc5P2_24(input: List<String>) {
     println("Total: $total")
 }
 
+
+// Recursive function, keep swapping and passing the list until it's valid, then return the middle.
 fun findMiddle(instruction: List<Int>, rules: Map<Int, Set<Int>>): Int {
+    // Get the failing X + Y index and swap
     val failed = instruction.mapIndexed { xIndex, digit ->
         val digitRules = rules[digit] ?: setOf()
 
+        // Get only the numbers that pertain to that digits rules
         val ys = instruction.filter { digitRules.contains(it) }
+
+        // For each Y
         val failedYIndex = ys.map { y ->
-            instruction.mapIndexedNotNull { index, i -> // find all indexes of Y
-                if (i == y) index else null
-            }.find { yIndex ->
-                yIndex > xIndex
-            }
-        }.firstOrNull { it != null }
+            // get all indexes of that Y
+            instruction
+                // get all indexes of that Y
+                .mapIndexedNotNull { index, i -> if (i == y) index else null }
+                // find all instances of Y appearing before X
+                .find { yIndex -> yIndex > xIndex }
+        }
+            // Grab the first failed Y instance (or Null if nothing failed)
+            .firstOrNull { it != null }
+        // If we found a failing Y, send back the X-Y problematic pair
         if (failedYIndex != null) Pair(xIndex, failedYIndex) else null
     }.firstOrNull { it != null }
 
+    // If no failing pair was found, the instruction is now valid and we can grab the middle
     return if (failed == null) {
          instruction[instruction.size/2]
     } else {
+        // Move the invalid Y to the index before the X, then recur
         val newInstruction = instruction.toMutableList().apply {
             removeAt(failed.second)
-        }.apply {
             add(failed.first, instruction[failed.second])
         }.toList()
         findMiddle(newInstruction, rules)
