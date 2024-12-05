@@ -11,7 +11,6 @@ fun aoc3P1_24(input: String) {
     println("Total: $total")
 }
 
-
 fun aoc3P2_24(input: String) {
     var total = 0
     var doCalc = true

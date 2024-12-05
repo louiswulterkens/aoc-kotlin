@@ -8,6 +8,8 @@ import aoc_2024.aoc3_24.aoc3P1_24
 import aoc_2024.aoc3_24.aoc3P2_24
 import aoc_2024.aoc4_24.aoc4P1_24
 import aoc_2024.aoc4_24.aoc4P2_24
+import aoc_2024.aoc5_24.aoc5P1_24
+import aoc_2024.aoc5_24.aoc5P2_24
 import java.io.File
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -34,7 +36,10 @@ fun aoc2024() {
 //    aoc3P2_24(getFileAsString(fileName(problem = 3)))
 
 //    aoc4P1_24(getFileAsString(fileName(problem = 4)))
-    aoc4P2_24(getFileAsString(fileName(problem = 4)))
+//    aoc4P2_24(getFileAsString(fileName(problem = 4)))
+
+    aoc5P1_24(getFileAsStringLines(fileName(problem = 5)))
+    aoc5P2_24(getFileAsStringLines(fileName(problem = 5)))
 
 }
 
