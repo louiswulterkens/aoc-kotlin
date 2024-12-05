@@ -76,8 +76,10 @@ fun aoc5P2_24(input: List<String>) {
         }
     }
 
-    val total = invalidPagesList.sumOf {
-        findMiddle(it, rules)
+    val total = invalidPagesList.sumOf { instruction ->
+        println("Instruction: $instruction")
+        val ordered = addToSolution(instruction = instruction, index = 0, partialSolution = listOf(), rules = rules)
+        ordered?.let { it[it.size/2] } ?: throw Exception("Didn't Get Solution")
     }
 
     println("Total: $total")
@@ -120,3 +122,16 @@ fun findMiddle(instruction: List<Int>, rules: Map<Int, Set<Int>>): Int {
         findMiddle(newInstruction, rules)
     }
 }
+
+fun addToSolution(instruction: List<Int>, index: Int, partialSolution: List<Int>, rules: Map<Int, Set<Int>>): List<Int>? {
+    if (partialSolution.size == instruction.size) return partialSolution
+
+    for (i in 0..partialSolution.size) {
+        val testing = partialSolution.toMutableList().apply { add(i, instruction[index]) }
+        if (checkValidInstruction(testing, rules)) {
+            return addToSolution(instruction, index+1, testing, rules)
+        }
+    }
+    return null
+}
+
