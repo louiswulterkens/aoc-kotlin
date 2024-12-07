@@ -1,4 +1,4 @@
-package aoc_2024.aoc6_24
+package aoc_2024
 
 class Day06(val input: List<String>) {
 
