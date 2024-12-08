@@ -74,14 +74,6 @@ class Day06Redo(val input: List<String>) {
         return traversed.map { it.first }.toSet() to (grid[location] != null)
     }
 
-    operator fun List<CharArray>.get(point: Point2D): Char? =
-        getOrNull(point.y)?.getOrNull(point.x)
-
-    operator fun List<CharArray>.set(point: Point2D, char: Char) {
-        this[point.y][point.x] = char
-    }
-
-
     private fun Point2D.turn() : Point2D =
         when(this) {
             Point2D.NORTH -> Point2D.EAST
@@ -90,13 +82,4 @@ class Day06Redo(val input: List<String>) {
             Point2D.WEST -> Point2D.NORTH
             else -> throw IllegalArgumentException("Invalid direction $this")
         }
-
-    private val tmp = listOf<Triple<Int, Int, Int>>(
-        Triple(4, 5, 0),
-        Triple(5, 6, 3),
-        Triple(6, 8, 2),
-        Triple(2, 7, 0),
-        Triple(4, 7, 0),
-        Triple(6, 8, 3)
-    )
 }
