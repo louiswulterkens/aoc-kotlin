@@ -45,13 +45,6 @@ class Day07(input: List<String>) {
 
     private fun List<String>.safeAt(x: Int, y: Int): Char =
         if(y in this.indices && x in this[y].indices) this[y][x] else ' '
-
-    private fun List<CharArray>.set(x: Int, y: Int, value: Char) = {
-
-    }
-
-    private fun List<String>.isBlocked(x: Int, y: Int): Boolean =
-        this.safeAt(x, y) == '#'
 }
 
 
