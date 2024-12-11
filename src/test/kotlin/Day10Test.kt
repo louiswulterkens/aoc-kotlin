@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
-@DisplayName("Day 9")
+@DisplayName("Day 10")
 class Day10Test {
 
     @Nested
@@ -17,18 +17,11 @@ class Day10Test {
     inner class Part1 {
 
         @Test
-        fun `Matches 4x4`() {
-
-        }
-
-        @Test
         fun `Matches example`() {
             val answer = Day10(resourceAsListOfString("day10_example.txt")).solvePart1()
 
             assertThat(answer).isEqualTo(36)
         }
-
-
 
         @Test
         fun `Actual answer`() {
