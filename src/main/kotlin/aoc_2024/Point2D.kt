@@ -22,5 +22,15 @@ data class Point2D(val x: Int, val y: Int) {
 
 }
 
+operator fun List<CharArray>.get(point: Point2D): Char? =
+    getOrNull(point.y)?.getOrNull(point.x)
+
+operator fun List<CharArray>.set(point: Point2D, char: Char) {
+    this[point.y][point.x] = char
+}
+
 operator fun <T> List<List<T>>.get(point: Point2D): T? =
     this.getOrNull(point.y)?.getOrNull(point.x)
+
+fun List<CharArray>.safe(point: Point2D): Boolean =
+    point.let { (x, y) -> y in this.indices && x in this[y].indices }
