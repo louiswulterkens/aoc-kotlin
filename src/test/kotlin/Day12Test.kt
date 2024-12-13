@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
-@DisplayName("Day 9")
+@DisplayName("Day 12")
 class Day12Test {
 
     @Nested
