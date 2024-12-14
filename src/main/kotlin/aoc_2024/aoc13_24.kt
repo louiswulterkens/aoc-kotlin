@@ -35,16 +35,11 @@ class Day13(input: List<String>) {
     }
 
     private val additional = 10000000000000L
-    fun solvePart2(): Int =
+    fun solvePart2(): Long =
         buttonsAndPrizes
-            .map { ButtonsAndPrize(a = it.a, b = it.b, prize = it.prize.first + additional to it.prize.second + additional) }
-            .mapNotNull { findTokens(it) }
-            .sum()
-
-
-    private fun findLargerTokens(bp: ButtonsAndPrize) {
-
-    }
+            // make ButtonsAndPrize with larger prize value, then turn it into the ClawMachine for easier understanding of matrix
+            .map { ClawMachine(ButtonsAndPrize(a = it.a, b = it.b, prize = it.prize.first + additional to it.prize.second + additional)) }
+            .sumOf { it.pressButtons() }
 
     private fun parse(input: List<String>): List<ButtonsAndPrize> {
 
@@ -72,6 +67,27 @@ class Day13(input: List<String>) {
         val b: Point2D,
         val prize: Pair<Long, Long>
     )
+
+    class ClawMachine(
+        val aX: Long, val aY: Long,
+        val bX: Long, val bY: Long,
+        val prizeX: Long, val prizeY: Long
+    ) {
+        constructor(bp: ButtonsAndPrize) : this(
+            aX = bp.a.x.toLong(), aY = bp.a.y.toLong(),
+            bX = bp.b.x.toLong(), bY = bp.b.y.toLong(),
+            prizeX = bp.prize.first, prizeY = bp.prize.second,
+        )
+
+        fun pressButtons(): Long {
+            val det = aX * bY - aY * bX
+            val a = (prizeX * bY - prizeY * bX) / det
+            val b = (aX * prizeY - aY * prizeX) / det
+            return if (aX * a + bX * b == prizeX && aY * a + bY * b == prizeY) {
+                a * 3 + b
+            } else 0
+        }
+    }
 
     private operator fun Point2D.times(num: Int) = Point2D(x * num, y * num)
 
