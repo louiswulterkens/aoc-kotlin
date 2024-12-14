@@ -41,7 +41,7 @@ class Day13Test {
         }
 
         @Test
-        fun `Matches example 3`() {
+        fun `Actual answer`() {
             val answer = Day13(resourceAsListOfString("day13.txt")).solvePart2()
 
             assertThat(answer).isEqualTo(102718967795500L)

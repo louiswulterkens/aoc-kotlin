@@ -29,7 +29,57 @@ class Day14(input: List<String>) {
             .reduce { acc, i -> acc * i  }
     }
 
-    fun solvePart2(): Int = 0
+    fun solvePart2(): Int {
+        var seconds = 1
+        val potentials: MutableSet<Int> = mutableSetOf()
+
+        while(potentials.size < 4) {
+            guards
+                .map { it.getFinalPosition(seconds) }
+                .groupBy { it.y }
+                .forEach {
+                    val sorted = it.value.sortedBy { it.x }
+
+                    if (sorted.size < 10) return@forEach
+
+                    var longest = 1
+                    var current = 1
+                    (0..<sorted.size-1).forEach { i ->
+                        if (sorted[i].x + 1 == sorted[i+1].x) {
+                            current++
+                        } else {
+                            current = 1
+                        }
+                        if (current > longest) longest = current
+                    }
+                    if (longest > 10) {
+                        potentials.add(seconds)
+                    }
+                }
+            seconds++
+        }
+
+        potentials.forEach { printGrid(it) }
+
+        return potentials.first()
+    }
+
+
+
+    private fun printGrid(seconds: Int) {
+        val snapshot = guards.map { it.getFinalPosition(seconds) }
+        println("Seconds: $seconds")
+        (0..100).forEach { x ->
+            println("")
+            (0..103).forEach { y ->
+                if (Point2D(x, y) in snapshot ) {
+                    print("\u25A1")
+                } else {
+                    print(".")
+                }
+            }
+        }
+    }
 
     private fun Guard.getFinalPosition(seconds: Int): Point2D {
         val distance = vector * seconds

@@ -34,17 +34,10 @@ class Day14Test {
     @DisplayName("Part 2")
     inner class Part2 {
         @Test
-        fun `Matches example 1`() {
-            val answer = Day14(resourceAsListOfString("day14_example.txt")).solvePart2()
-
-            assertThat(answer).isEqualTo(875318608908L)
-        }
-
-        @Test
-        fun `Matches example 3`() {
+        fun `Actual answer`() {
             val answer = Day14(resourceAsListOfString("day14.txt")).solvePart2()
 
-            assertThat(answer).isEqualTo(102718967795500L)
+            assertThat(answer).isEqualTo(8159)
         }
     }
 }
