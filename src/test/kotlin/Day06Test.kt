@@ -44,7 +44,7 @@ class Day06Test {
         fun `Actual answer`() {
             val answer = Day06Redo(resourceAsListOfString("day06.txt")).solvePart2()
 
-            assertThat(answer).isEqualTo(41)
+            assertThat(answer).isEqualTo(1972)
         }
 
     }
